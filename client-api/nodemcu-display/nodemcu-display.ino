@@ -15,53 +15,26 @@
 
 LiquidCrystal lcd(RS, EN, d4, d5, d6, d7);
 
-const char *ssid = "SEU_SSID";
-const char *password = "SENHA_DA_REDE";
-
-byte grau[8] = {
-    B00001100,
-    B00010010,
-    B00010010,
-    B00001100,
-    B00000000,
-    B00000000,
-    B00000000,
-    B00000000,
-};
+// altere com o nome da sua rede wifi
+const char *ssid = "Wii";
+// altere com a senha da sua wifi
+const char *password = "12345678";
 
 void setup()
 {
 
   Serial.begin(115200);
 
-  WiFi.begin(ssid, password);
-
-  Wire.begin(D2, D1);
-
-  lcd.begin(16, 2);
-  // lcd.backlight();
-  lcd.home();
-
-  //Cria o caractere customizado com o simbolo do grau
-  lcd.createChar(0, grau);
-
-  //limpa o tela e escreve os textos iniciais
-  lcd.clear();
-  lcd.setCursor(1, 1);
-  lcd.print("SSID: ");
-
-  lcd.setCursor(7, 1);
-  lcd.print(ssid);
-
-  lcd.setCursor(1, 2);
-  lcd.print("Conectando...");
-
+  setandoPinos();
   //Verifica se o esp está conectado na rede, caso contrário realiza a tentaiva a cada 2 seg.
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(2000);
     Serial.println(WiFi.status());
   }
+  lcd.clear();
+  lcd.setCursor(14, 0);
+  lcd.print("On");
 }
 
 void loop()
@@ -83,7 +56,7 @@ void loop()
       //realizando o parse do json para um JsonObject
       //DynamicJsonBuffer jsonBuffer(bufferSize);
       DynamicJsonDocument jsonBuffer(bufferSize);
-      
+
       //JsonObject &root = jsonBuffer.parseObject(http.getString());
 
       deserializeJson(jsonBuffer, http.getString());
@@ -107,4 +80,22 @@ void loop()
     http.end();
   }
   delay(60000);
+}
+
+void setandoPinos()
+{
+  WiFi.begin(ssid, password);
+
+  Wire.begin(D2, D1);
+
+  lcd.begin(16, 2);
+  lcd.clear();
+  lcd.setCursor(1, 1);
+  lcd.print("SSID: ");
+
+  lcd.setCursor(7, 1);
+  lcd.print(ssid);
+
+  lcd.setCursor(1, 2);
+  lcd.print("Conectando...");
 }
