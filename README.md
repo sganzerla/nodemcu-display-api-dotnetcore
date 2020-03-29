@@ -8,21 +8,11 @@ Consumindo API REST dotnet Core que retorna a temperatura de algumas localidades
   <img src="https://user-images.githubusercontent.com/22710963/77842518-a0b5df80-7169-11ea-96f1-57ad53e3c168.png" alt="reset" style="max-width:100%;"></a>
 </p> 
  
- ### Circuito 
- 
- <p>
- <a target="_blank" rel="https://user-images.githubusercontent.com/22710963/77842571-33ef1500-716a-11ea-9ab7-eddb25cc5211.png" >
-  <img src="https://user-images.githubusercontent.com/22710963/77842571-33ef1500-716a-11ea-9ab7-eddb25cc5211.png" alt="reset" style="max-width:100%"></a>
-</p> 
+### Configurações 
 
-  ## Hardware necessário
-```
-- a) 1 Nodemcu   
-- b) 1 Display LCD 16X2 
-- d) 1 Potenciometro Linear 500k  
-- d) 1 Protoboard
-- j) 12-15 Cabos de conexão   
-```
+-[Server API dotnet Core](https://github.com/sganzerla/nodemcu-display-api-dotnetcore/tree/master/server-api) - Como criar, configurar nginx e publicar no Linux.
+ 
+- Cliente Nodemcu [link](https://github.com/sganzerla/nodemcu-display-api-dotnetcore/tree/master/client-api/nodemcu-display) - Criando cliente e montando circuito com display lcd.
 
 
 ### Links úteis
