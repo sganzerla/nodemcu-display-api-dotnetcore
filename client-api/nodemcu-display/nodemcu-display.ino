@@ -20,6 +20,7 @@ const char *ssid = "Wii";
 // altere com a senha da sua wifi
 const char *password = "12345678";
 
+const String urlGet = "http://192.168.1.5:5001/WeatherForecast";
 // Tempo para checar API
 const long tempoMiliseg = 5000;
 
@@ -28,7 +29,7 @@ uint32_t timer = 0;
 void setup()
 {
 
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   setandoPinos();
   //Verifica se o esp está conectado na rede, caso contrário realiza a tentaiva a cada 2 seg.
@@ -64,28 +65,38 @@ void chamandoAPI()
 
     //cria a requisição http passando o URL da api node
     HTTPClient http;
-    http.begin("http://192.168.1.5:5001/WeatherForecast");
-    int httpCode = http.GET();
-
-    if (httpCode > 0)
+    if (http.begin(urlGet))
     {
-      const String input = http.getString();
+      int httpCode = http.GET();
 
-      DynamicJsonDocument doc(1024);
+      if (httpCode == HTTP_CODE_OK)
+      {
+        String payload = http.getString();
+        Serial.println();
+        Serial.print("JSON:");
+        Serial.print(payload);
+        Serial.println();
 
-      deserializeJson(doc, input);
+        DynamicJsonDocument doc(1024);
 
-      exibirDadosDisplay(doc);
+        deserializeJson(doc, payload);
+
+        exibirDadosDisplay(doc);
+      }
+      else
+      {
+        lcd.setCursor(1, 1);
+        lcd.print("Error API: ");
+        lcd.print(httpCode);
+      }
+
+      //fechando a conexão
+      http.end();
     }
     else
     {
-      lcd.setCursor(1, 1);
-      lcd.print("Error API: ");
-      lcd.print(httpCode);
+      lcd.print("[HTTP] Error API");
     }
-
-    //fechando a conexão
-    http.end();
   }
 }
 
