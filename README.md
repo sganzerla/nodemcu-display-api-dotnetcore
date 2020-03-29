@@ -1,5 +1,6 @@
-# nodemcu-dht11-display
+# nodemcu-display-api-dotnetcore
 
+Consumindo API REST dotnet Core que retorna a temperatura de algumas localidades com um cliente rodando dentro de uma placa Nodemcu e exibindo num display de lcd.
 
 
 
