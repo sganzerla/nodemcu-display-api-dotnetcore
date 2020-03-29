@@ -1,46 +1,113 @@
-# nodemcu-display-api-dotnetcore
+# Client API REST Nodemcu
 
-Consumindo API REST dotnet Core que retorna a temperatura de algumas localidades com um cliente rodando dentro de uma placa Nodemcu e exibindo num display de lcd.
-
-### Consumindo API e exibindo no display o payload (vídeo)
-<p>
- <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/5IAuFDBAtKw" >
-  <img src="https://user-images.githubusercontent.com/22710963/77842518-a0b5df80-7169-11ea-96f1-57ad53e3c168.png" alt="reset" style="max-width:100%;"></a>
+ ### Circuito 
+ 
+ <p>
+ <a target="_blank" rel="https://user-images.githubusercontent.com/22710963/77842571-33ef1500-716a-11ea-9ab7-eddb25cc5211.png" >
+  <img src="https://user-images.githubusercontent.com/22710963/77842571-33ef1500-716a-11ea-9ab7-eddb25cc5211.png" alt="reset" style="max-width:100%"></a>
 </p> 
+
+  ## Hardware necessário
+```
+- a) 1 Nodemcu   
+- b) 1 Display LCD 16X2 
+- c) 1 Potenciometro Linear 500k  
+- d) 1 Protoboard
+- e) 12-15 Cabos de conexão   
+```
+### a) Placa Nodemcu v1 
+ Possui pinos de alimentação somente de 3.3v
  
-### Configurações 
+<p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77499726-a0e47100-6e31-11ea-9768-2aabb681259e.png">
+  <img src="https://user-images.githubusercontent.com/22710963/77499726-a0e47100-6e31-11ea-9768-2aabb681259e.png" alt="reset" style="max-width:100%;"></a></p> 
 
-- [Server API dotnet Core](https://github.com/sganzerla/nodemcu-display-api-dotnetcore/tree/master/server-api) - Como criar, configurar nginx e publicar no Linux.
+ ### b) Display LCD 16X2 
+  
+  Atenção os pinos devem estar soldados no display senão não funciona.
  
-- [Cliente Nodemcu](https://github.com/sganzerla/nodemcu-display-api-dotnetcore/tree/master/client-api/nodemcu-display) - Criando cliente e montando circuito com display lcd.
+<p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77712613-0d3aae00-6fb3-11ea-892b-0d5e8753b394.png">
+  <img src="https://user-images.githubusercontent.com/22710963/77712613-0d3aae00-6fb3-11ea-892b-0d5e8753b394.png" alt="reset" style="max-width:100%;"></a></p>
+
+### c) Potenciometro Linear 500k
+  <p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77713295-c1890400-6fb4-11ea-87e0-9f36d23c9042.png">
+  <img src="https://user-images.githubusercontent.com/22710963/77713295-c1890400-6fb4-11ea-87e0-9f36d23c9042.png" alt="reset" style="max-width:100%;"></a></p> 
+   
+  ### d) Protoboard 
+<p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77499362-a8574a80-6e30-11ea-9744-a15c3206fd50.png">
+  <img src="https://user-images.githubusercontent.com/22710963/77499362-a8574a80-6e30-11ea-9744-a15c3206fd50.png" alt="reset" style="max-width:100%;"></a></p> 
+
+  ### e) Cabos de conexão
+<p><a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77499606-5662f480-6e31-11ea-96fd-9e268dceb50f.png">
+  <img src="https://user-images.githubusercontent.com/22710963/77499606-5662f480-6e31-11ea-96fd-9e268dceb50f.png" alt="reset" style="max-width:100%;"></a></p> 
 
 
-### Links úteis
+### Configuração:
 
+- Alterar rede wifi e senha
+
+```
+// altere com o nome da sua rede wifi
+const char *ssid = "Wii";
+// altere com a senha da sua wifi
+const char *password = "12345678";
+
+```
+
+- Alterar URL para consumir API e o intervalo em que é chamada
+
+```
+const String urlGet = "http://192.168.1.5:5001/WeatherForecast";
+// Tempo para checar API
+const long tempoMiliseg = 5000;
+```
+
+- Alterar os dados do payload exibidos no display
+
+JSON Recebido
+
+```
+[
+  {
+    "date": "2020-03-30T11:11:17.8544144-03:00",
+    "temperatureC": 18,
+    "temperatureF": 64,
+    "summary": "Mild"
+  },
+  {
+    "date": "2020-03-31T11:11:17.8545598-03:00",
+    "temperatureC": 48,
+    "temperatureF": 118,
+    "summary": "Sweltering"
+  },
+  {
+    "date": "2020-04-01T11:11:17.8545632-03:00",
+    "temperatureC": -18,
+    "temperatureF": 0,
+    "summary": "Hot"
+  },
+  {
+    "date": "2020-04-02T11:11:17.8545635-03:00",
+    "temperatureC": 12,
+    "temperatureF": 53,
+    "summary": "Chilly"
+  },
+  {
+    "date": "2020-04-03T11:11:17.8545637-03:00",
+    "temperatureC": 39,
+    "temperatureF": 102,
+    "summary": "Freezing"
+  }
+]
+```
+Exibindo chave summary e temperatureC
+
+```
+
+  //carregando os valores nas variaveis
+  const char *summary = json[0]["summary"];
+  const int temp = json[0]["temperatureC"];
  
-- [IDE Arduino](https://www.arduino.cc/en/Main/Software)
- 
-- [Documentação sintaxe C++](https://www.arduino.cc/reference/en/)
+}
 
-- [Fritzing](https://fritzing.org/home/) - Licença comercial
-
-- [Fritzing](https://softfamous.com/fritzing/download/) - Versão gratuita (antiga mas permite que seja atualizada)
-
-- [TinkerCad](https://www.tinkercad.com) - Ambiente Virtual p/ prototipagem
- 
-- [Circuit Digest](https://circuitdigest.com/microcontroller-projects/interfacing-lcd-with-nodemcu) Pinagem Display LCD sem conector I2C no Nodemcu
-
-- [Arduino Json](https://arduinojson.org/v6/api/json/deserializejson/) Biblioteca para trabalhar com JSON
-
-- [Doc Dotnet](https://docs.microsoft.com/pt-br/dotnet/core/tools/dotnet-build) Fazer build de aplicação dotnet para deploy
-
-- [Configurando Servidor Nginx](https://github.com/sganzerla/run-dotnetcore-nginx-server) Criando serviço e configurando o proxy
-
-- [Filipe Flop](https://www.filipeflop.com/blog/como-utilizar-uma-api-no-esp8266-nodemcu-boas-praticas-para-integracoes/) Client Api Rest no Nodemcu
- 
-
- ###  Aplicações
- 
- - Dispositivos que precisam consultar dados e interagir com API.
-
+```
 
