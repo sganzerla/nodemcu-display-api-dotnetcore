@@ -54,12 +54,57 @@ user@user:~/wheater-api$ sudo cp -r bin/Debug/netcoreapp3.1/publish /var/www/htm
 Etapa 1 concluída.
 
 
-## 2° Etapa - Instalando Nginx, criando serviço e configurando proxy reverso
+## 2° Etapa - Instalando Nginx, criando serviço 
 
 #### Instalando Nginx 
 
 ```
 user@user:~$ sudo apt update && sudo apt install nginx
 ```
+
+#### Criando serviço para rodar aplicação .NET
+
+```
+user@user:~$ sudo gedit /etc/systemd/system/wheater-api.service
+```
+
+Dentro do arquivo colar as seguintes configurações 
+
+```
+[Unit]
+Description=Wheater-api running on Ubuntu
+[Service]
+WorkingDirectory=/var/www/html/wheater-api
+ExecStart=/usr/bin/dotnet /var/www/html/wheater-api/wheater-api.dll
+Restart=always
+# Restart service after 10 seconds if the dotnet service crashes:
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=wheater-api
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+[Install]
+WantedBy=multi-user.target
+```
+
+#### Habilitando serviço para iniciar junto com sistema operacional
+```
+user@user:~$ sudo systemctl enable wheater-api.service
+```
+
+#### Iniciar serviço
+
+```
+user@user:~$ sudo systemctl start wheater-api.service
+```
+
+#### Conferir status do serviço
+
+```
+user@user:~$ sudo systemctl status wheater-api.service
+```
+
+## 3° Etapa - Configurando proxy reverso
 
 
