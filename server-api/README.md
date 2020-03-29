@@ -1,11 +1,11 @@
-# Client API REST Nodemcu
+# Server API REST dotnet Core
 
- ### Circuito 
+ ### Requisitos
  
- <p>
- <a target="_blank" rel="https://user-images.githubusercontent.com/22710963/77842571-33ef1500-716a-11ea-9ab7-eddb25cc5211.png" >
-  <img src="https://user-images.githubusercontent.com/22710963/77842571-33ef1500-716a-11ea-9ab7-eddb25cc5211.png" alt="reset" style="max-width:100%"></a>
-</p> 
+ - Ubuntu 
+ 
+ - [.Net Core 3.1](https://docs.microsoft.com/pt-br/dotnet/core/install/linux-package-manager-ubuntu-1804)
+   
 
   ## Hardware necessário
 ```
