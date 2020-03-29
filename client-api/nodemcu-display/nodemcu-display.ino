@@ -23,7 +23,7 @@ const char *password = "12345678";
 void setup()
 {
 
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   setandoPinos();
   //Verifica se o esp está conectado na rede, caso contrário realiza a tentaiva a cada 2 seg.
@@ -39,17 +39,25 @@ void setup()
 
 void loop()
 {
+  chamandoAPI();
+  delay(60000);
+}
+
+void chamandoAPI()
+{
   // Verifica se o esp está conectado
   if (WiFi.status() == WL_CONNECTED)
   {
 
     //cria a requisição http passando o URL da api node
     HTTPClient http;
-    http.begin("https://localhost:5001/WeatherForecast");
+    http.begin("http://192.168.1.5:5001/WeatherForecast");
     int httpCode = http.GET();
+    Serial.println(httpCode);
     if (httpCode > 0)
     {
-
+      lcd.setCursor(14, 1);
+      lcd.print("On");
       //definindo o tamanho do buffer para o objeto json
       const size_t bufferSize = JSON_OBJECT_SIZE(5);
 
@@ -65,7 +73,6 @@ void loop()
       const char *_temper = jsonBuffer["temperatureC"];
       const char *summary = jsonBuffer["summary"];
 
-      lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Data: ");
       lcd.print(_data);
@@ -76,10 +83,12 @@ void loop()
       //Mostra o simbolo do grau formado pelo array
       lcd.write((byte)0);
     }
+    lcd.setCursor(14, 1);
+    lcd.print("Er");
+
     //fechando a conexão
     http.end();
   }
-  delay(60000);
 }
 
 void setandoPinos()
