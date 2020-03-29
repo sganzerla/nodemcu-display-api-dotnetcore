@@ -159,10 +159,21 @@ user@user:~ sudo systemctl restart nginx
 
 #### Acessar no navegador 
 Com localhost http://localhost:5001/WeatherForecast e com seu próprio ip 
-<p>
- <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77859558-89660900-71e0-11ea-8bd6-8c848676f1b7.png" >
-  <img src="https://user-images.githubusercontent.com/22710963/77859558-89660900-71e0-11ea-8bd6-8c848676f1b7.png" alt="reset" style="max-width:100%;"></a>
-</p> 
 
 
 Etapa 3 concluída.
+
+## 4° Etapa - Liberando portas do firewall e realizando redirecionamento de portas dentro do roteador 
+
+Liberando portas no firewall da máquina
+```
+$ sudo apt-get install ufw
+$ sudo ufw allow 5000/tcp
+$ sudo ufw allow 5001/tcp
+$ sudo ufw enable
+$ sudo ufw status verbose
+```
+No roteador precisa ser criado regra para redirecionar solicitações para a porta 5000/5001 para o IP da máquina do servidor
+
+https://www.youtube.com/watch?v=9havP7L2Smk
+
