@@ -13,19 +13,17 @@
 
 Execute os seguintes comandos dentro do terminal:
 
-- Verifica se há versão .NET Core SDK instalada na máquina, resposta 
-
+#### Verifica se há versão .NET Core SDK instalada na máquina, resposta 
 ```
 user@user:~$ sudo dotnet --list-sdks
 ```
 
-- Criando projeto API e acessando diretório do projeto
-
+#### Criando projeto API e acessando diretório do projeto
 ```
 user@user:~$ sudo dotnet new api -n wheater-api && cd wheater-api
 ```
 
-- Rodando a aplicação para verificar se foi criada corretamente
+#### Rodando a aplicação para verificar se foi criada corretamente
 
 Importante que as portas 5000 e 5001 estejam disponíveis
 ```
@@ -41,13 +39,13 @@ Acesse a seguinte URL https://localhost:5001/WeatherForecast
 
 Pare de rodar a aplicação para liberar as portas novamente digitando Ctrl + C dentro do terminal
 
-- Gerando artefato para publicação no servidor
+#### Gerando artefato para publicação no servidor
 
 ```
 user@user:~/wheater-api$ sudo dotnet publish
 ```
 
-- Movendo o artefato gerado para diretório de publicação
+#### Movendo o artefato gerado para diretório de publicação
 
 ```
 user@user:~/wheater-api$ sudo cp -r bin/Debug/netcoreapp3.1/publish /var/www/html/wheater-api
@@ -57,3 +55,11 @@ Etapa 1 concluída.
 
 
 ## 2° Etapa - Instalando Nginx, criando serviço e configurando proxy reverso
+
+#### Instalando Nginx 
+
+```
+user@user:~$ sudo apt update && sudo apt install nginx
+```
+
+
