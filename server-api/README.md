@@ -104,6 +104,7 @@ user@user:~$ sudo systemctl start wheater-api.service
 ```
 user@user:~$ sudo systemctl status wheater-api.service
 ```
+Etapa 2 concluída
 
 ## 3° Etapa - Configurando proxy reverso
 
@@ -149,3 +150,19 @@ user@user:~$ sudo ln -s /etc/nginx/sites-available/wheater-api /etc/nginx/sites-
 ```
 user@user:~$ sudo nginx -t
 ```
+
+#### Restartando Nginx para pegar configurações
+
+```
+user@user:~ sudo systemctl restart nginx
+```
+
+#### Acessar no navegador 
+Com localhost http://localhost:5001/WeatherForecast e com seu próprio ip 
+<p>
+ <a target="_blank" rel="noopener noreferrer" href="https://user-images.githubusercontent.com/22710963/77859558-89660900-71e0-11ea-8bd6-8c848676f1b7.png" >
+  <img src="https://user-images.githubusercontent.com/22710963/77859558-89660900-71e0-11ea-8bd6-8c848676f1b7.png" alt="reset" style="max-width:100%;"></a>
+</p> 
+
+
+Etapa 3 concluída.
