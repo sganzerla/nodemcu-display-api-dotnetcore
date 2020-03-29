@@ -9,7 +9,7 @@
 - [Nginx](https://www.nginx.com/) - Hospedar aplicações web e rodar serviços
 
 
-### 1°Passo - Criando projeto e gerando artefato para publicar no servidor 
+## 1° Etapa - Criando projeto e gerando artefato para publicar no servidor 
 
 Execute os seguintes comandos dentro do terminal:
 
@@ -55,3 +55,5 @@ user@user:~/wheater-api$ sudo cp -r bin/Debug/netcoreapp3.1/publish /var/www/htm
 
 Etapa 1 concluída.
 
+
+## 2° Etapa - Instalando Nginx, criando serviço e configurando proxy reverso
