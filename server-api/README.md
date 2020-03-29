@@ -107,4 +107,45 @@ user@user:~$ sudo systemctl status wheater-api.service
 
 ## 3° Etapa - Configurando proxy reverso
 
+#### Criando arquivo de configuração
 
+```
+user@user:~$ sudo gedit /etc/nginx/sites-available/wheater-api
+```
+
+Colar dentro do arquivo as configurações abaixo
+
+```
+server {
+         listen [::]:5001;
+         listen 5001;
+
+        root /var/www/html/wheater-api;
+        server_name wheater-api *.wheater-api;
+
+        location / {
+                     proxy_pass      http://localhost:5000/;
+                     proxy_http_version 1.1;
+                     proxy_set_header   Upgrade $http_upgrade;                    
+                     proxy_set_header   Connection $http_connection; 
+                     proxy_set_header   Host $host;
+                     proxy_cache_bypass $http_upgrade;
+                     proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+                     proxy_set_header   X-Forwarded-Proto $scheme;
+                     proxy_set_header 'Access-Control-Allow-Headers' '*';
+                     proxy_set_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS,PUT,DELETE';
+        } 
+}
+```
+#### Criando link simbólico para habilitar o site
+
+
+```
+user@user:~$ sudo ln -s /etc/nginx/sites-available/wheater-api /etc/nginx/sites-enabled/
+```
+
+#### Consultar sintaxe do arquivo de configuração
+
+```
+user@user:~$ sudo nginx -t
+```
