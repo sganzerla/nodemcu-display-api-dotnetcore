@@ -63,26 +63,53 @@ const long tempoMiliseg = 5000;
 
 - Alterar os dados do payload exibidos no display
 
-```
+JSON Recebido
 
-void exibirDadosDisplay(DynamicJsonDocument json)
-{
+```
+[
+  {
+    "date": "2020-03-30T11:11:17.8544144-03:00",
+    "temperatureC": 18,
+    "temperatureF": 64,
+    "summary": "Mild"
+  },
+  {
+    "date": "2020-03-31T11:11:17.8545598-03:00",
+    "temperatureC": 48,
+    "temperatureF": 118,
+    "summary": "Sweltering"
+  },
+  {
+    "date": "2020-04-01T11:11:17.8545632-03:00",
+    "temperatureC": -18,
+    "temperatureF": 0,
+    "summary": "Hot"
+  },
+  {
+    "date": "2020-04-02T11:11:17.8545635-03:00",
+    "temperatureC": 12,
+    "temperatureF": 53,
+    "summary": "Chilly"
+  },
+  {
+    "date": "2020-04-03T11:11:17.8545637-03:00",
+    "temperatureC": 39,
+    "temperatureF": 102,
+    "summary": "Freezing"
+  }
+]
+```
+Exibindo chave summary e temperatureC
+
+```
 
   //carregando os valores nas variaveis
   const char *summary = json[0]["summary"];
   const int temp = json[0]["temperatureC"];
-
-  lcd.setCursor(0, 0);
-  lcd.print("S: ");
-  lcd.print(summary);
-
-  lcd.setCursor(0, 2);
-  lcd.print("T: ");
-  lcd.print(temp);
-  lcd.write(B11011111); // Imprime o símbolo de grau
-  lcd.print("C");
+ 
 }
 
 ```
+
 
 
