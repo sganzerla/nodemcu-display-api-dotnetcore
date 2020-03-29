@@ -20,6 +20,11 @@ const char *ssid = "Wii";
 // altere com a senha da sua wifi
 const char *password = "12345678";
 
+// Tempo para checar API
+const long tempoMiliseg = 5000;
+
+uint32_t timer = 0;
+
 void setup()
 {
 
@@ -32,19 +37,27 @@ void setup()
     delay(2000);
     Serial.println(WiFi.status());
   }
-  lcd.clear();
-  lcd.setCursor(14, 0);
-  lcd.print("On");
+
+  lcd.setCursor(1, 1);
+  lcd.print("OK Conectado...");
+  delay(5000);
 }
 
 void loop()
 {
-  chamandoAPI();
-  delay(60000);
+
+  if (millis() - timer >= tempoMiliseg)
+  {
+    chamandoAPI();
+    timer = millis();
+  }
 }
 
 void chamandoAPI()
 {
+
+  lcd.clear();
+
   // Verifica se o esp está conectado
   if (WiFi.status() == WL_CONNECTED)
   {
@@ -53,42 +66,45 @@ void chamandoAPI()
     HTTPClient http;
     http.begin("http://192.168.1.5:5001/WeatherForecast");
     int httpCode = http.GET();
-    Serial.println(httpCode);
+
     if (httpCode > 0)
     {
-      lcd.setCursor(14, 1);
-      lcd.print("On");
-      //definindo o tamanho do buffer para o objeto json
-      const size_t bufferSize = JSON_OBJECT_SIZE(5);
+      const String input = http.getString();
 
-      //realizando o parse do json para um JsonObject
-      //DynamicJsonBuffer jsonBuffer(bufferSize);
-      DynamicJsonDocument jsonBuffer(bufferSize);
+      DynamicJsonDocument doc(1024);
 
-      //JsonObject &root = jsonBuffer.parseObject(http.getString());
+      deserializeJson(doc, input);
 
-      deserializeJson(jsonBuffer, http.getString());
-      //carregando os valores nas variaveis
-      const char *_data = jsonBuffer["date"];
-      const char *_temper = jsonBuffer["temperatureC"];
-      const char *summary = jsonBuffer["summary"];
-
-      lcd.setCursor(0, 0);
-      lcd.print("Data: ");
-      lcd.print(_data);
-
-      lcd.setCursor(0, 2);
-      lcd.print("Temperatura: ");
-      lcd.print(_temper);
-      //Mostra o simbolo do grau formado pelo array
-      lcd.write((byte)0);
+      exibirDadosDisplay(doc);
     }
-    lcd.setCursor(14, 1);
-    lcd.print("Er");
+    else
+    {
+      lcd.setCursor(1, 1);
+      lcd.print("Error API: ");
+      lcd.print(httpCode);
+    }
 
     //fechando a conexão
     http.end();
   }
+}
+
+void exibirDadosDisplay(DynamicJsonDocument json)
+{
+
+  //carregando os valores nas variaveis
+  const char *summary = json[0]["summary"];
+  const int temp = json[0]["temperatureC"];
+
+  lcd.setCursor(0, 0);
+  lcd.print("S: ");
+  lcd.print(summary);
+
+  lcd.setCursor(0, 2);
+  lcd.print("T: ");
+  lcd.print(temp);
+  lcd.write(B11011111); // Imprime o símbolo de grau
+  lcd.print("C");
 }
 
 void setandoPinos()
@@ -99,12 +115,7 @@ void setandoPinos()
 
   lcd.begin(16, 2);
   lcd.clear();
-  lcd.setCursor(1, 1);
-  lcd.print("SSID: ");
 
-  lcd.setCursor(7, 1);
-  lcd.print(ssid);
-
-  lcd.setCursor(1, 2);
+  lcd.setCursor(1, 0);
   lcd.print("Conectando...");
 }
