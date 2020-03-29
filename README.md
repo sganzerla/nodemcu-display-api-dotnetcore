@@ -4,7 +4,7 @@ Consumindo API REST dotnet Core que retorna a temperatura de algumas localidades
 
 ### Consumindo API e exibindo no display o payload (vídeo)
 <p>
- <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/cKQxw5mlMgw" >
+ <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/5IAuFDBAtKw" >
   <img src="https://user-images.githubusercontent.com/22710963/77842518-a0b5df80-7169-11ea-96f1-57ad53e3c168.png" alt="reset" style="max-width:100%;"></a>
 </p> 
  
