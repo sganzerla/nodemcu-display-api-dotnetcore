@@ -1,6 +1,6 @@
 # nodemcu-display-api-dotnetcore
 
-Consumindo API REST dotnet Core que retorna a temperatura de algumas localidades com um cliente rodando dentro de uma placa Nodemcu e exibindo num display de lcd.
+Consumindo API REST .NET Core que retorna a temperatura de algumas localidades com um cliente rodando dentro de uma placa Nodemcu e exibindo num display de lcd.
 
 ### Consumindo API e exibindo no display o payload (vídeo)
 <p>
@@ -11,7 +11,7 @@ Consumindo API REST dotnet Core que retorna a temperatura de algumas localidades
 
  ### [Server API dotnet Core](https://github.com/sganzerla/nodemcu-display-api-dotnetcore/tree/master/server-api) 
  
-<details><summary>- Como criar, configurar nginx e publicar no Linux.
+<details><summary> Como criar, configurar nginx e publicar no Linux.
 </summary>
 <p>
 
@@ -201,7 +201,7 @@ https://www.youtube.com/watch?v=9havP7L2Smk
 ## [Cliente Nodemcu](https://github.com/sganzerla/nodemcu-display-api-dotnetcore/tree/master/client-api/nodemcu-display) 
  
 
-<details><summary>- Criando cliente e montando circuito com display lcd.</summary>
+<details><summary> Criando cliente e montando circuito com display lcd.</summary>
 <p>
 
   ### Circuito 
