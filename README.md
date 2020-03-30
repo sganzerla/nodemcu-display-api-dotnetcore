@@ -9,10 +9,9 @@ Consumindo API REST .NET Core que retorna a temperatura de algumas localidades c
 </p> 
   
 
- ### [Server API dotnet Core](https://github.com/sganzerla/nodemcu-display-api-dotnetcore/tree/master/server-api) 
+ ## [Server API .NET Core](https://github.com/sganzerla/nodemcu-display-api-dotnetcore/tree/master/server-api) - Como criar, configurar nginx e publicar no Linux.
  
-<details><summary> Como criar, configurar nginx e publicar no Linux.
-</summary>
+<details><summary>  Ver mais </summary>
 <p>
 
  ### Tecnologias utilizadas
@@ -198,10 +197,10 @@ https://www.youtube.com/watch?v=9havP7L2Smk
 </details>
  
  
-## [Cliente Nodemcu](https://github.com/sganzerla/nodemcu-display-api-dotnetcore/tree/master/client-api/nodemcu-display) 
+## [Cliente Nodemcu](https://github.com/sganzerla/nodemcu-display-api-dotnetcore/tree/master/client-api/nodemcu-display) - Criando cliente e montando circuito com display lcd 
  
 
-<details><summary> Criando cliente e montando circuito com display lcd.</summary>
+<details><summary> Ver mais </summary>
 <p>
 
   ### Circuito 
